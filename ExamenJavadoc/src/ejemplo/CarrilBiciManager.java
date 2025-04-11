@@ -4,17 +4,34 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+/**
+ * Clase que se encarga de administrar los carriles bicis en la bahia de Cádiz
+ * @author 
+ * version 2.4.0
+ * 
+ */
 
 public class CarrilBiciManager {
 
     private final Map<String, Double> tramos; // nombre del tramo -> longitud en km
     private final Map<String, String> estadoTramos; // nombre del tramo -> estado
-
+    
+    /**
+     * Constructor de la clase CarrilBiciManager.
+     * Inicializa los mapas que gestionan los tramos y los estados de los carriles bici.
+     */
     public CarrilBiciManager() {
         this.tramos = new HashMap<>();
         this.estadoTramos = new HashMap<>();
     }
-
+    
+    /**
+     * Metodo de la clase que sirve para añadir tramos
+     * @param nombre
+     * @param longitud
+     * @throws IllegalArgumentException evita que el tramo este vacio 
+     * @throws IllegalArgumentException evita que su longitud sea 0
+     */
     public void añadirTramo(String nombre, double longitud) {
         if (nombre == null || nombre.isBlank()) {
             throw new IllegalArgumentException("El nombre del tramo no puede estar vacío");
@@ -26,7 +43,7 @@ public class CarrilBiciManager {
         estadoTramos.put(nombre, "En servicio");
     }
 
-    public void actualizarEstado(String nombre, String nuevoEstado) {
+     public void actualizarEstado(String nombre, String nuevoEstado) {
         if (!tramos.containsKey(nombre)) {
             throw new NoSuchElementException("El tramo indicado no existe: " + nombre);
         }
@@ -37,13 +54,13 @@ public class CarrilBiciManager {
         actualizarEstado(nombre, estado);
     }
 
-    public String consultarEstado(String nombre) {
+     public String consultarEstado(String nombre) {
         if (!estadoTramos.containsKey(nombre)) {
             throw new NoSuchElementException("El tramo indicado no existe");
         }
         return estadoTramos.get(nombre);
     }
-
+    
     public double longitudTotal() {
         return tramos.values().stream().mapToDouble(Double::doubleValue).sum();
     }

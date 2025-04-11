@@ -78,17 +78,26 @@ public class CarrilBiciManager {
         return estadoTramos.get(nombre);
     }
     
-
+    /**
+     * metodo que dice la longitud total de los tramos
+     * @return devuelve la longitud total
+     */
     public double longitudTotal() {
         return tramos.values().stream().mapToDouble(Double::doubleValue).sum();
     }
 
-
+    /**
+     * metodo que dice los tramos registrados en el Map
+     * @return
+     */
     public Map<String, Double> obtenerTramos() {
         return Collections.unmodifiableMap(tramos);
     }
 
-
+    /**
+     * metodo que genera un informe sobre los carriles bici
+     * @return
+     */
     public String generarInforme() {
         StringBuilder sb = new StringBuilder("INFORME DE CARRILES BICI - Bahía de Cádiz\n");
         sb.append("===========================================\n");

@@ -43,31 +43,51 @@ public class CarrilBiciManager {
         estadoTramos.put(nombre, "En servicio");
     }
 
-     public void actualizarEstado(String nombre, String nuevoEstado) {
+    /**
+     * Metodo de la clase que se encarga de actualizar el estado
+     * @param nombre
+     * @param nuevoEstado
+     * @throws NoSuchElementException indica si el tramo a actualizar no existe
+     */
+    public void actualizarEstado(String nombre, String nuevoEstado) {
         if (!tramos.containsKey(nombre)) {
             throw new NoSuchElementException("El tramo indicado no existe: " + nombre);
         }
         estadoTramos.put(nombre, nuevoEstado);
     }
     
+    /**
+     * Metodo de clase que cambia el estado, usa el metodo actualizarEstado
+     * @param nombre
+     * @param estado
+     * @deprecated este metodo se debe de dejar de utilizar y utilizar directamente actualizar estado
+     */
     public void cambiarEstado(String nombre, String estado) {
         actualizarEstado(nombre, estado);
     }
 
-     public String consultarEstado(String nombre) {
+    /**
+     * Metodo que se encarga de consultar el estado
+     * @param nombre
+     * @return devuelve el tramo
+     */
+    public String consultarEstado(String nombre) {
         if (!estadoTramos.containsKey(nombre)) {
             throw new NoSuchElementException("El tramo indicado no existe");
         }
         return estadoTramos.get(nombre);
     }
     
+
     public double longitudTotal() {
         return tramos.values().stream().mapToDouble(Double::doubleValue).sum();
     }
 
+
     public Map<String, Double> obtenerTramos() {
         return Collections.unmodifiableMap(tramos);
     }
+
 
     public String generarInforme() {
         StringBuilder sb = new StringBuilder("INFORME DE CARRILES BICI - Bahía de Cádiz\n");
